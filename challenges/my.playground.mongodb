@@ -72,7 +72,13 @@ db.produtos.find();
 // 13 - Inclua o campo criadoPor em todos os documentos, colocando Ronald 
 // McDonald no valor desse campo
 
-db.produtos.updateMany({},{$set: {criadoPor: "Ronald McDonald"}});
-db.produtos.find({}, { nome: 1, _id: 0, criadoPor: 1 });
+// db.produtos.updateMany({},{$set: {criadoPor: "Ronald McDonald"}});
+// db.produtos.find({}, { nome: 1, _id: 0, criadoPor: 1 });
+
+// 14 - Crie uma query que retorne todos os lanches que possuem picles em
+// seus ingredientes e mostre apenas os 3 primeiros itens contidos no array
+// valoresNutricionais
+
+db.produtos.find({ingredientes:{ $all: ["picles"]}},{_id: 0, nome: 1, ingredientes: 1, valoresNutricionais:{$slice: 3}});
 
 
