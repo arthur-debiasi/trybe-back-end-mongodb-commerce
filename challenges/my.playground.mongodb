@@ -46,7 +46,28 @@ db.produtos.find();
 // 9 - Retorne o nome de todos os lanches que possuam calorias
 // abaixo de 500
 
-db.produtos.find({"valoresNutricionais.0.quantidade":{$lt: 500}}, {nome: 1, _id: 0});
+// db.produtos.find({"valoresNutricionais.0.quantidade":{$lt: 500}}, {nome: 1, _id: 0});
+
+// 10 - Retorne o nome de todos os lanches que tenham o percentual 
+// de proteínas maior ou igual a 30 e menor ou igual a 40
+
+// db.produtos.find({});
+
+// db.produtos.find({"valoresNutricionais.3.percentual": {$gte: 30, $lte: 40}}, {nome: 1, _id: 0});
+
+// 11 - Retorne o nome do produto, a quantidade de curtidas
+// e quantos itens foram vendidos dos produtos que não sejam
+// iguais a Big Mac e McChicken
+
+// db.produtos.find({nome:{$nin: ["Big Mac", "McChicken"]}}, {nome: 1, _id: 0, curtidas: 1, vendidos: 1});
+
+// 12 - Adicione ketchup aos ingredientes para todos os sanduíches menos o 
+// McChicken, garantindo que não haja duplicidade nos ingredientes
+
+// db.produtos.find({});
+db.produtos.updateMany({nome:{$ne: "McChicken"}}, {$addToSet:{ingredientes: "ketchup"}});
+
+db.produtos.find({}, { nome: 1, _id: 0, ingredientes: 1 });
 
 
 
